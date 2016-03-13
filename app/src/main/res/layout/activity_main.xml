@@ -1,73 +1,103 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:id="@+id/layout">
+    android:id="@+id/layout"
+    android:orientation="vertical">
 
-    <EditText
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:maxLines="3"
-        android:id="@+id/contenttoread"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Text to Read :"
+            android:id="@+id/textoread"
+            android:maxLines="3"
+             />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:maxLines="3"
+            android:id="@+id/contenttoread"
+            android:layout_marginLeft="3dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Text to Read :"
-        android:id="@+id/textoread"
-        android:maxLines="3"
-        android:layout_alignBottom="@+id/contenttoread"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Speed :"
+            android:id="@+id/textView"
 
-    <TextView
-        android:layout_width="wrap_content"
+            />
+
+       <Spinner
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="3dp"
+           android:id="@+id/speedspinner">
+       </Spinner>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Milli Secs for a word :"
-        android:id="@+id/textView"
-        android:layout_marginTop="34dp"
-        android:layout_below="@+id/textoread"
-        android:layout_alignRight="@+id/textoread"
-        android:layout_alignEnd="@+id/textoread" />
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No of words at a time: "
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:id="@+id/wordsSpinner">
 
-    <EditText
-        android:layout_width="wrap_content"
+        </Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/speed"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_alignRight="@+id/contenttoread"
-        android:layout_alignEnd="@+id/contenttoread"
-        android:layout_toRightOf="@+id/textView"
-        android:layout_toEndOf="@+id/textView" />
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:background="@color/material_grey_300">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Illuminati!"
+            android:id="@+id/outtext"
+            android:layout_margin="70dp"
+            android:layout_gravity="center_horizontal"
+            />
 
+    </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Speed Read"
         android:id="@+id/readbtn"
         android:onClick="btnfunction"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp" />
+        android:layout_gravity="center_horizontal"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Illuminati!"
-        android:id="@+id/outtext"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        />
 
-</RelativeLayout>
+
+</LinearLayout>
