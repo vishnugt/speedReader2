@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     String[] textsplitted;
     boolean isReading = false;
     int no=1;
+    public static String initial_content = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //initializing views
-        outputText = (TextView)findViewById(R.id.outtext);
+       // outputText = (TextView)findViewById(R.id.outtext);
       //  speedview = (EditText)findViewById(R.id.speed);
         contenttoread = (EditText)findViewById(R.id.contenttoread);
         btn = (Button)findViewById(R.id.readbtn);
@@ -56,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch(position){
                     case 0:
-                        speed=500;
+                        speed=450;
                         break;
                     case 1:
-                        speed=400;
+                        speed=350;
                         break;
                     case 2:
-                        speed=250;
+                        speed=200;
                         break;
                     case 3:
                         speed=150;
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     public void btnfunction(View v)
     {
 
-
+        initial_content=contenttoread.getText().toString();
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -144,24 +145,25 @@ public class MainActivity extends AppCompatActivity {
                             public void run() {
                                 int j=0;
                                 String text="";
-                                //TODO: check if next string exists in splitted array and only then add it to text
+
                                 while ( j<no){
-                                        if(textsplitted[iterator+1]!=null) {
-                                            text += textsplitted[iterator++];
-                                            text += " ";
-
+                                            if(!textsplitted[iterator].contains("~")) {
+                                                text += textsplitted[iterator++];
+                                                text += " ";
+                                            }
                                             j++;
-                                        }
-                                    else
-                                            break;
 
 
 
+                                    contenttoread.setCursorVisible(!isReading);
+                                    contenttoread.setText(text);
                                 }
                                 Log.d("text",text);
-                                outputText.setText(text);
+                                //outputText.setText(text);
+
                                 if(iterator==textsplitted.length-2)
                                 {
+
                                     isReading=false;
                                     btn.setText("Speed Read");
                                 }
@@ -199,9 +201,31 @@ public class MainActivity extends AppCompatActivity {
         */
         isReading = true;
         iterator=0;
-        textsplitted = contenttoread.getText().toString().split(" ");
+        //textsplitted = contenttoread.getText().toString().split(" ");
+        String temp = "";
+        switch(contenttoread.getText().toString().split(" ").length%6){
+            case 5:
+                temp=contenttoread.getText().toString()+" ~~~~~";
+                break;
+            case 4:
+                temp=contenttoread.getText().toString()+" ~~~~";
+                break;
+            case 3:
+                temp=contenttoread.getText().toString()+" ~~~";
+                break;
+            case 2:
+                temp=contenttoread.getText().toString()+" ~~";
+                break;
+            case 1:
+                temp=contenttoread.getText().toString()+" ~";
+                break;
+            case 0:
+                temp=contenttoread.getText().toString();
+                break;
 
-
+        }
+        textsplitted=temp.split(" ");
+        Log.d("textsplitted", temp);
         t.start();
         btn.setText("Stop!");
 
