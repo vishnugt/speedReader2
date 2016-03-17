@@ -4,6 +4,8 @@ speedReader by Meliodas on 13/03/2016
 
 package edu.nitt.spider.vishnugt.speedreader;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     boolean isReading = false;
     int no=1;
     public static String initial_content = "";
+
+    ClipboardManager myclipboard;
+    ClipData myClip;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,9 +106,19 @@ public class MainActivity extends AppCompatActivity {
                 no=1;
             }
         });
-
+        myclipboard= (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        ClipData data=myclipboard.getPrimaryClip();
+        ClipData.Item item=data.getItemAt(0);
+        contenttoread.setText(item.getText().toString());
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ClipData data=myclipboard.getPrimaryClip();
+        ClipData.Item item=data.getItemAt(0);
+        contenttoread.setText(item.getText().toString());
+    }
 
     public void initializeValues(){
         //Initializing values for spinners
